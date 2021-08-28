@@ -18,6 +18,9 @@ public class PersonTest {
 
 		testClass.setlName("lName1");
 		assertEquals("lName1", testClass.getlName());
+
+		testClass.setPersonId(1202021);
+		assertEquals(1202021, testClass.getPersonId());
 	}
 
 }
