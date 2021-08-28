@@ -50,6 +50,23 @@ public class MockUserServiceImplTest {
 		assertEquals(ALI, user.getFirstName());
 	}
 
+	@Test
+	public void findById_old_found() {
+		doReturn(person).when(personDao).findOne(Integer.valueOf(1));
+		doReturn(user).when(transformer).toUserDomain(person);
+
+		User user = testClass.findById_old(Integer.valueOf(1));
+		assertEquals(ALI, user.getFirstName());
+	}
+
+	@Test(expected = UserNotFoundException.class)
+	public void findById_old_not_found_exception() {
+		doReturn(null).when(personDao).findOne( Matchers.any(Integer.class));
+		doReturn(user).when(transformer).toUserDomain(Matchers.any(Person.class));
+
+		testClass.findById_old(Integer.valueOf(1));
+	}
+
 	@Test 
 	public void findById_not_found_default_user() {
 		doReturn(null).when(personDao).findOne( Matchers.any(Integer.class));
